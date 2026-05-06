@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Victoria Lotus — Body Arts Performer</title>
+  <title>Victoria Lotus — Aerial Arts Performer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -1224,18 +1224,18 @@
           </div>
         </div>
       </div>
-      <div class="contact-form reveal">
+      <form class="contact-form reveal" action="https://formspree.io/f/xkoyzokd" method="POST" id="contactForm">
         <div class="form-group">
-          <label class="form-label">Full Name</label>
-          <input class="form-input" type="text" placeholder="Your name"/>
+          <label class="form-label" for="name">Full Name</label>
+          <input class="form-input" id="name" type="text" name="name" placeholder="Your name" required/>
         </div>
         <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input class="form-input" type="email" placeholder="your@email.com"/>
+          <label class="form-label" for="email">Email Address</label>
+          <input class="form-input" id="email" type="email" name="email" placeholder="your@email.com" required/>
         </div>
         <div class="form-group">
-          <label class="form-label">I'm Inquiring About</label>
-          <select class="form-input">
+          <label class="form-label" for="service">I'm Inquiring About</label>
+          <select class="form-input" id="service" name="service" required>
             <option value="" disabled selected>Select a service...</option>
             <option>Live Performance Booking</option>
             <option>Aerial Workshop</option>
@@ -1246,11 +1246,11 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Tell Me More</label>
-          <textarea class="form-input" placeholder="Share your vision, event details, dates, or any questions..."></textarea>
+          <label class="form-label" for="message">Tell Me More</label>
+          <textarea class="form-input" id="message" name="message" placeholder="Share your vision, event details, dates, or any questions..."></textarea>
         </div>
-        <button class="form-submit" onclick="handleSubmit()">Send Inquiry</button>
-      </div>
+        <button type="submit" class="form-submit" id="contactSubmitBtn">Send Inquiry</button>
+      </form>
     </div>
   </section>
 
@@ -1260,9 +1260,9 @@
       <p class="section-eyebrow" style="text-align:center;">Stay Connected</p>
       <h2>The Lotus Letter</h2>
       <p>Aerial arts inspiration, behind-the-scenes glimpses, workshop announcements, and the occasional musing on movement, spirituality, and the sky. No noise — just beauty.</p>
-      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-        <input type="email" placeholder="Your email address"/>
-        <button type="submit">Subscribe</button>
+      <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
+        <input type="email" id="newsletterEmail" placeholder="Your email address" required/>
+        <button type="submit" id="newsletterBtn">Subscribe</button>
       </form>
     </div>
   </section>
@@ -1382,19 +1382,49 @@
       showTestimonial((currentTestimonial + 1) % testimonials.length);
     }, 6000);
 
-    // Form handlers
-    function handleSubmit() {
-      const btn = document.querySelector('.form-submit');
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = 'var(--forest-light)';
-      btn.style.color = 'var(--gold-light)';
-    }
+    // Contact form — Formspree AJAX submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contactSubmitBtn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('https://formspree.io/f/xkoyzokd', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(this)
+        });
+        if (res.ok) {
+          btn.textContent = 'Message Sent ✓';
+          btn.style.background = 'var(--forest-light)';
+          btn.style.color = 'var(--gold-light)';
+          this.reset();
+        } else {
+          btn.textContent = 'Something went wrong — try again';
+          btn.style.background = 'var(--rose)';
+          btn.disabled = false;
+        }
+      } catch(err) {
+        btn.textContent = 'Network error — try again';
+        btn.style.background = 'var(--rose)';
+        btn.disabled = false;
+      }
+    });
 
+    // Newsletter — redirect to Mailchimp signup page with email pre-filled
     function handleNewsletter(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.textContent = 'Subscribed ✓';
-      btn.style.background = 'var(--forest-light)';
+      const email = document.getElementById('newsletterEmail').value;
+      const btn = document.getElementById('newsletterBtn');
+      if (!email) return;
+      btn.textContent = 'Redirecting...';
+      // Open Mailchimp signup page; email pre-fill uses the u/id params already in the URL
+      const mailchimpBase = 'https://mailchi.mp/eed7bcbc0255/ydneqzj6kh';
+      window.open(mailchimpBase + '?EMAIL=' + encodeURIComponent(email), '_blank');
+      setTimeout(() => {
+        btn.textContent = 'Subscribed ✓';
+        btn.style.background = 'var(--forest-light)';
+      }, 800);
     }
 
     // Smooth nav highlight
