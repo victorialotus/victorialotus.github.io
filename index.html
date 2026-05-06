@@ -94,6 +94,16 @@
       transition: opacity 0.2s, color 0.2s;
     }
     .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+    .nav-livestream {
+      background: var(--rose) !important;
+      color: var(--cream) !important;
+      padding: 0.45rem 1.1rem !important;
+      opacity: 1 !important;
+      letter-spacing: 0.15em !important;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-livestream:hover { background: var(--rose-light) !important; color: var(--cream) !important; }
 
     /* ========== HERO ========== */
     .hero {
@@ -925,9 +935,8 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#disciplines">Disciplines</a></li>
-      <li><a href="#workshops">Workshops</a></li>
       <li><a href="#contact">Book Now</a></li>
+      <li><a href="https://lotuslounge.solidcams.com" target="_blank" rel="noopener" class="nav-livestream">● Live Stream</a></li>
     </ul>
   </nav>
 
@@ -981,7 +990,7 @@
     </div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Aerial Arts · Custom Events · Workshops</p>
+      <p class="hero-eyebrow">Aerial Arts · Custom Events · Live Performance</p>
       <h1 class="hero-title">
         Victoria
         <em>Lotus</em>
@@ -1063,6 +1072,16 @@
     <div class="services-header reveal">
       <p class="section-eyebrow">What I Offer</p>
       <h2 class="section-title">Services designed to <em>astonish</em></h2>
+      <p style="margin-top:1.5rem;font-size:0.9rem;font-weight:300;line-height:1.8;color:rgba(240,236,228,0.7);">
+        Want to experience Victoria Lotus up close? Visit
+        <a href="https://lotuslounge.solidcams.com" target="_blank" rel="noopener"
+           style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);padding-bottom:1px;transition:color 0.2s,border-color 0.2s;"
+           onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'"
+           onmouseout="this.style.color='var(--gold-light)';this.style.borderColor='rgba(201,168,76,0.4)'">
+          Lotus Lounge
+        </a>
+        — an exclusive space to connect and explore.
+      </p>
     </div>
     <div class="services-grid reveal">
       <div class="service-card">
@@ -1072,16 +1091,6 @@
         </svg>
         <h3 class="service-name">Live Performances</h3>
         <p class="service-desc">Custom aerial acts for corporate events, weddings, galas, festivals, and private celebrations. Each performance is choreographed to reflect your event's unique vision and atmosphere.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-num">02</span>
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="18" stroke="#c9a84c" stroke-width="1.5"/>
-          <path d="M24 6 C24 6 20 15 24 24 C28 33 24 42 24 42" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M6 24 C6 24 15 20 24 24 C33 28 42 24 42 24" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3 class="service-name">Aerial Workshops</h3>
-        <p class="service-desc">Beginner-friendly to intermediate group workshops in aerial silk and lyra. A transformative experience that builds strength, grace, and confidence in a supportive environment.</p>
       </div>
       <div class="service-card">
         <span class="service-num">03</span>
@@ -1097,102 +1106,14 @@
   </section>
 
   <!-- DISCIPLINES -->
-  <section class="disciplines" id="disciplines">
-    <div class="disciplines-inner">
-      <div class="reveal">
-        <p class="section-eyebrow">The Practice</p>
-        <h2 class="section-title">Aerial <em>disciplines</em></h2>
-        <ul class="disciplines-list">
-          <li>Aerial Silk</li>
-          <li>Lyra / Aerial Ring</li>
-          <li>Static Trapeze</li>
-          <li>Floor Choreography</li>
-          <li>Contortion Arts</li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <blockquote class="disciplines-quote">
-          "Aerial arts are not simply acrobatics — they are a conversation between the body, the apparatus, and the space between earth and sky. Every performance is a prayer in motion."
-          <cite>— Victoria Lotus</cite>
-        </blockquote>
-        <div style="margin-top: 3rem;">
-          <p class="section-eyebrow" style="margin-bottom: 1rem;">Available For</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-            {['Corporate Events','Weddings','Festivals','Private Parties','Brand Activations','Theater','Film & TV','Virtual Events'].map(tag => `<span style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 0.9rem;border:1px solid rgba(201,168,76,0.25);color:rgba(240,236,228,0.65);">${tag}</span>`).join('')}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORKSHOPS -->
-  <section class="workshops" id="workshops">
-    <div class="workshops-inner">
-      <div class="workshops-header reveal">
-        <div>
-          <p class="section-eyebrow">Learn to Fly</p>
-          <h2 class="section-title">Workshop <em>offerings</em></h2>
-        </div>
-        <a href="#contact" class="btn-ghost">View Full Schedule</a>
-      </div>
-      <div class="workshops-grid reveal">
-        <div class="workshop-card featured">
-          <div>
-            <span class="workshop-tag">⭐ Signature Experience</span>
-            <h3 class="workshop-title">Introduction to Aerial Silk</h3>
-            <p class="workshop-desc">A 2-hour journey into the fundamentals of aerial silk. You'll learn basic climbs, wraps, and your first drop — all in a safe, encouraging, and beautiful environment. No experience necessary; just a willingness to rise.</p>
-            <a href="#contact" class="workshop-cta">Reserve Your Spot</a>
-          </div>
-          <div style="text-align:center; padding: 2rem;">
-            <svg viewBox="0 0 160 200" style="width:140px;opacity:0.5;animation:float 7s ease-in-out infinite;" xmlns="http://www.w3.org/2000/svg">
-              <path d="M80,0 L78,60 M80,0 L82,60" stroke="#c9a84c" stroke-width="2" opacity="0.8"/>
-              <path d="M78,60 C50,80 40,120 55,160 C65,185 80,190 80,190" stroke="#c9a84c" stroke-width="2" fill="none"/>
-              <path d="M82,60 C110,80 120,120 105,160 C95,185 80,190 80,190" stroke="#c4846a" stroke-width="2" fill="none"/>
-              <circle cx="80" cy="48" r="9" fill="#c9a84c" opacity="0.7"/>
-              <ellipse cx="80" cy="62" rx="10" ry="13" fill="#c9a84c" opacity="0.6"/>
-              <path d="M70,65 C55,58 42,62 38,70" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M90,65 C105,58 118,62 122,70" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M75,75 C68,100 65,130 62,160" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <path d="M85,75 C92,100 95,130 98,160" stroke="#c4846a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            </svg>
-          </div>
-        </div>
-        <div class="workshop-card">
-          <span class="workshop-tag">Beginner</span>
-          <h3 class="workshop-title">Lyra Fundamentals</h3>
-          <p class="workshop-desc">Discover the aerial ring — its elegance, its challenge, its grace. Learn key poses, transitions, and how to flow within the hoop with confidence.</p>
-          <a href="#contact" class="workshop-cta">Learn More</a>
-        </div>
-        <div class="workshop-card">
-          <span class="workshop-tag">All Levels</span>
-          <h3 class="workshop-title">Movement & Embodiment</h3>
-          <p class="workshop-desc">A grounded workshop blending floor work, breath, and aerial philosophy. Perfect for performers of all kinds looking to deepen their physical and artistic presence.</p>
-          <a href="#contact" class="workshop-cta">Learn More</a>
-        </div>
-        <div class="workshop-card">
-          <span class="workshop-tag">Private</span>
-          <h3 class="workshop-title">1-on-1 Coaching</h3>
-          <p class="workshop-desc">Personalized coaching sessions tailored to your goals — whether you're building strength, refining technique, or preparing for your first performance.</p>
-          <a href="#contact" class="workshop-cta">Inquire</a>
-        </div>
-        <div class="workshop-card">
-          <span class="workshop-tag">Group · Bespoke</span>
-          <h3 class="workshop-title">Private Group Events</h3>
-          <p class="workshop-desc">Bachelorette parties, team bonding, birthday experiences — a one-of-a-kind aerial workshop designed entirely around your group's energy and intention.</p>
-          <a href="#contact" class="workshop-cta">Plan Your Event</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- TESTIMONIALS -->
   <section class="testimonials">
     <div class="testimonials-inner">
       <p class="section-eyebrow" style="text-align:center;">Kind Words</p>
       <h2 class="section-title" style="text-align:center; margin-bottom: 3rem;">What people <em>say</em></h2>
       <div id="testimonialSlider">
-        <p class="testimonial-text" id="testimonialText">Victoria's performance at our gala left every single guest breathless. She didn't just perform — she transformed the entire room into something sacred. We receive compliments about it to this day.</p>
-        <p class="testimonial-author" id="testimonialAuthor">— <span>Elena Marsh</span>, Event Director</p>
+        <p class="testimonial-text" id="testimonialText">I don't think there are enough adjectives to describe how wonderful Victoria is. She's definitely one of the top performers — always worth the time.</p>
+        <p class="testimonial-author" id="testimonialAuthor">— <span>Verified Client</span></p>
       </div>
       <div class="testimonial-dots" id="testimonialDots">
         <button class="active" onclick="showTestimonial(0)"></button>
@@ -1208,12 +1129,8 @@
       <div class="contact-info reveal">
         <p class="section-eyebrow">Get in Touch</p>
         <h2 class="section-title">Let's create something <em>unforgettable</em></h2>
-        <p>Whether you're planning an event, interested in workshops, or have a creative collaboration in mind — reach out and let's begin the conversation.</p>
+        <p>Whether you're planning an event, exploring a creative collaboration, or simply want to connect — reach out and let's begin the conversation.</p>
         <div class="contact-details">
-          <div class="contact-detail">
-            <span class="contact-detail-label">Email</span>
-            <span>hello@victorialotus.com</span>
-          </div>
           <div class="contact-detail">
             <span class="contact-detail-label">X / Twitter</span>
             <a href="https://x.com/victorialotus_" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color=''"  >@victorialotus_</a>
@@ -1238,7 +1155,6 @@
           <select class="form-input" id="service" name="service" required>
             <option value="" disabled selected>Select a service...</option>
             <option>Live Performance Booking</option>
-            <option>Aerial Workshop</option>
             <option>Private Coaching</option>
             <option>Private Group Event</option>
             <option>Artistic Direction / Collaboration</option>
@@ -1259,7 +1175,7 @@
     <div class="newsletter-inner">
       <p class="section-eyebrow" style="text-align:center;">Stay Connected</p>
       <h2>The Lotus Letter</h2>
-      <p>Aerial arts inspiration, behind-the-scenes glimpses, workshop announcements, and the occasional musing on movement, spirituality, and the sky. No noise — just beauty.</p>
+      <p>Aerial arts inspiration, behind-the-scenes glimpses, upcoming event announcements, and the occasional musing on movement, spirituality, and the sky. No noise — just beauty.</p>
       <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
         <input type="email" id="newsletterEmail" placeholder="Your email address" required/>
         <button type="submit" id="newsletterBtn">Subscribe</button>
@@ -1277,12 +1193,9 @@
       <ul class="footer-links">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#workshops">Workshops</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="footer-social">
-        <a href="#" class="social-link" title="TikTok">TK</a>
-        <a href="#" class="social-link" title="YouTube">YT</a>
         <a href="https://x.com/victorialotus_" class="social-link" title="X" target="_blank" rel="noopener">𝕏</a>
       </div>
     </div>
@@ -1350,9 +1263,9 @@
 
     // Testimonials
     const testimonials = [
-      { text: "Victoria's performance at our gala left every single guest breathless. She didn't just perform — she transformed the entire room into something sacred. We receive compliments about it to this day.", author: "Elena Marsh", role: "Event Director" },
-      { text: "The workshop Victoria led for our bachelorette weekend was the highlight of the trip. She made every single person feel capable, beautiful, and brave. We were all flying by the end.", author: "Jasmine Torres", role: "Private Client" },
-      { text: "We brought Victoria in for our brand launch and it elevated the entire evening beyond anything we imagined. The combination of artistry and physical mastery is truly rare.", author: "Marcus Chen", role: "Creative Director" }
+      { text: "I don't think there are enough adjectives to describe how wonderful Victoria is. She's definitely one of the top performers — always worth the time.", author: "Verified Client", role: "" },
+      { text: "Nothing can beat her — she is the sweetest and kindest girl.", author: "Verified Client", role: "" },
+      { text: "Incredible girl and show. My whole body was shaking.", author: "Verified Client", role: "" }
     ];
     let currentTestimonial = 0;
 
@@ -1365,7 +1278,7 @@
       authorEl.style.opacity = 0;
       setTimeout(() => {
         textEl.textContent = t.text;
-        authorEl.innerHTML = `— <span>${t.author}</span>, ${t.role}`;
+        authorEl.innerHTML = `— <span>${t.author}</span>${t.role ? ', ' + t.role : ''}`;
         textEl.style.transition = 'opacity 0.5s';
         authorEl.style.transition = 'opacity 0.5s';
         textEl.style.opacity = 1;
