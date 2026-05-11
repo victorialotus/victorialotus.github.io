@@ -165,6 +165,105 @@
       border-radius: 4px;
       box-shadow: 0 0 30px rgba(167,139,250,0.3), 0 0 60px rgba(255,110,199,0.15);
     }
+
+    /* ===== ABOUT ===== */
+    .about-section {
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,110,199,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(56,189,248,0.07) 0%, transparent 60%),
+                  var(--bg2);
+    }
+    .about-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-photo-wrap { position: relative; }
+    .about-photo-frame {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      padding: 5px;
+      background: linear-gradient(135deg, #ff6ec7, #a78bfa, #38bdf8, #34d399, #fbbf24, #f87171, #ff6ec7);
+      background-size: 400% auto;
+      animation: holoShift 4s linear infinite;
+      box-shadow: 0 0 25px rgba(255,110,199,0.5), 0 0 50px rgba(167,139,250,0.35), 0 0 80px rgba(56,189,248,0.2);
+    }
+    .about-photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, rgba(255,110,199,0.12) 0%, rgba(167,139,250,0.08) 50%, rgba(56,189,248,0.12) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .about-photo {
+      display: block;
+      width: 100%;
+      border-radius: 3px;
+      position: relative;
+      z-index: 1;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .about-photo-wrap::before,
+    .about-photo-wrap::after {
+      content: '';
+      position: absolute;
+      width: 28px; height: 28px;
+      border-style: solid;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .about-photo-wrap::before {
+      top: -8px; left: -8px;
+      border-width: 2px 0 0 2px;
+      border-color: #ff6ec7;
+    }
+    .about-photo-wrap::after {
+      bottom: -8px; right: -8px;
+      border-width: 0 2px 2px 0;
+      border-color: #38bdf8;
+    }
+    .gift-caption {
+      display: block;
+      text-align: center;
+      margin-top: 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      background: linear-gradient(90deg, #ff6ec7, #a78bfa, #38bdf8, #34d399, #fbbf24, #ff6ec7);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: holoShift 4s linear infinite;
+      transition: letter-spacing 0.3s, opacity 0.2s;
+      opacity: 0.85;
+    }
+    .gift-caption:hover {
+      letter-spacing: 0.25em;
+      opacity: 1;
+    }
+    .about-blurb {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-dim);
+      margin-top: 1.2rem;
+    }
+    .about-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
     .stars {
       position: fixed;
       inset: 0;
@@ -805,6 +904,8 @@
     @media (max-width: 768px) {
       nav { padding: 1rem 1.2rem; }
       .btn-book { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo-wrap { max-width: 320px; margin: 0 auto; }
       .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       .footer-inner { flex-direction: column; text-align: center; }
       .newsletter-form { flex-direction: column; }
@@ -892,7 +993,29 @@
 
   <hr class="holo-divider"/>
 
-  <!-- TESTIMONIALS -->
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-frame">
+          <a href="https://throne.com/victorialotus" target="_blank" rel="noopener"><img src="victoria.png" alt="Victoria Lotus" class="about-photo"/></a>
+        </div>
+        <a href="https://throne.com/victorialotus" target="_blank" rel="noopener" class="gift-caption">♡ Send a Gift</a>
+      </div>
+      <div class="about-text reveal">
+        <p class="section-eyebrow">About Me</p>
+        <h2 class="section-title">Hello, <em>beautiful soul</em></h2>
+        <p class="about-blurb">Howdy, thoughtful souls and secret lovers! I'm Victoria Lotus — a writer, thinker, and occasional mischief maker. By trade a professional nurse and lover of language, psychology, and the art of slow seduction.</p>
+        <p class="about-blurb">I believe intimacy is as much about the mind as it is the body, which is why my content blends teasing intellect with raw, sensual surrender. Hopefully you will find what you are looking for on my little corner of the internet here!</p>
+        <div class="about-cta">
+          <a href="https://sextpanther.com/victorialotus" target="_blank" rel="noopener" class="btn-primary">Text Me Now</a>
+          <a href="https://lotuslounge.solidcams.com" target="_blank" rel="noopener" class="btn-ghost">Visit Lotus Lounge</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="holo-divider"/>
   <section class="testimonials">
     <div class="testimonials-inner">
       <p class="section-eyebrow" style="text-align:center;">Kind Words</p>
