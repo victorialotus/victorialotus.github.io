@@ -33,20 +33,19 @@
       cursor: none;
     }
 
-    /* ===== RETRO HAND CURSOR ===== */
-    .cursor-hand {
+    /* ===== CRYSTAL BALL CURSOR ===== */
+    .cursor-ball {
       position: fixed;
       pointer-events: none;
       z-index: 99999;
-      width: 32px;
-      height: 40px;
-      transform: translate(-4px, -4px);
-      filter: drop-shadow(0 0 6px #ff6ec7) drop-shadow(0 0 12px #a78bfa);
-      transition: filter 0.2s;
+      width: 36px;
+      height: 36px;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
     }
-    .cursor-hand.hovering {
-      filter: drop-shadow(0 0 10px #38bdf8) drop-shadow(0 0 20px #ff6ec7) drop-shadow(0 0 30px #fbbf24);
-      transform: translate(-4px, -4px) scale(1.15);
+    .cursor-ball.hovering {
+      width: 48px;
+      height: 48px;
     }
 
     /* ===== HOLOGRAPHIC GRADIENT MIXIN ===== */
@@ -100,24 +99,72 @@
       animation: holoShift 4s linear infinite;
     }
 
-    /* ===== SCANLINE OVERLAY ===== */
-    .scanline-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9000;
-      overflow: hidden;
+    .vod-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
     }
-    .scanline-overlay::after {
+    .btn-vod {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 2.5rem;
+      width: 280px;
+      text-align: center;
+      position: relative;
+      color: var(--text);
+      border-radius: 2px;
+      transition: transform 0.2s, color 0.2s;
+      background: rgba(255,255,255,0.04);
+    }
+    .btn-vod::before {
       content: '';
       position: absolute;
-      left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(transparent, rgba(160,100,255,0.15), transparent);
-      animation: scanlines 6s linear infinite;
+      inset: 0;
+      border-radius: 2px;
+      padding: 1.5px;
+      background: linear-gradient(90deg, #fbbf24, #f87171, #ff6ec7, #a78bfa, #38bdf8, #34d399, #fbbf24);
+      background-size: 300% auto;
+      animation: holoShift 3s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
     }
+    .btn-vod:hover { transform: translateY(-2px) scale(1.02); color: #fbbf24; }
 
-    /* ===== STAR FIELD ===== */
+    .btn-vod-fan::before {
+      background: linear-gradient(90deg, #ff6ec7, #f87171, #fbbf24, #ff6ec7);
+      background-size: 300% auto;
+      animation: holoShift 3s linear infinite;
+    }
+    .btn-vod-fan:hover { color: #ff6ec7; }
+    .btn-vod-stream::before {
+      background: linear-gradient(90deg, #34d399, #38bdf8, #a78bfa, #34d399);
+      background-size: 300% auto;
+      animation: holoShift 3s linear infinite;
+    }
+    .btn-vod-stream:hover { color: #34d399; }
+    .btn-vod-premium::before {
+      background: linear-gradient(90deg, #fbbf24, #f87171, #ff6ec7, #fbbf24);
+      background-size: 300% auto;
+      animation: holoShiftReverse 2.5s linear infinite;
+    }
+    .btn-vod-premium:hover { color: #fbbf24; }
+
+    .iframe-embed {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .iframe-embed iframe {
+      border-radius: 4px;
+      box-shadow: 0 0 30px rgba(167,139,250,0.3), 0 0 60px rgba(255,110,199,0.15);
+    }
     .stars {
       position: fixed;
       inset: 0;
@@ -769,32 +816,40 @@
 <body>
 
   <!-- Retro hand cursor SVG -->
-  <svg id="cursorHand" class="cursor-hand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 44" style="display:none;">
-    <!-- Wrist/cuff -->
-    <rect x="9" y="34" width="14" height="5" rx="1.5" fill="#fff" stroke="#333" stroke-width="1"/>
-    <line x1="9" y1="36.5" x2="23" y2="36.5" stroke="#ccc" stroke-width="0.6"/>
-    <!-- Palm -->
-    <path d="M9 20 Q8 38 9 38 L23 38 Q24 38 24 20 Z" fill="#f5d9c8" stroke="#333" stroke-width="1.1"/>
-    <!-- Pinky (folded, short) -->
-    <rect x="9" y="17" width="3.5" height="7" rx="1.8" fill="#f5d9c8" stroke="#333" stroke-width="1"/>
-    <!-- Ring finger (folded) -->
-    <rect x="13" y="15" width="3.5" height="8" rx="1.8" fill="#f5d9c8" stroke="#333" stroke-width="1"/>
-    <!-- Middle finger (folded) -->
-    <rect x="17" y="14" width="3.5" height="9" rx="1.8" fill="#f5d9c8" stroke="#333" stroke-width="1"/>
-    <!-- Index finger POINTING UP — this is the pointing one -->
-    <rect x="13.5" y="4" width="5" height="18" rx="2.5" fill="#f5d9c8" stroke="#333" stroke-width="1.2"/>
-    <!-- Fingernail on index -->
-    <rect x="15" y="5" width="2" height="4.5" rx="1.2" fill="#e8b8a0" stroke="#bbb" stroke-width="0.5"/>
-    <!-- Knuckle line on index -->
-    <line x1="14" y1="16" x2="19" y2="16" stroke="#d4a898" stroke-width="0.7" stroke-linecap="round"/>
-    <!-- Thumb tucked to side -->
-    <ellipse cx="9" cy="24" rx="3" ry="5" fill="#f5d9c8" stroke="#333" stroke-width="1" transform="rotate(-10,9,24)"/>
-    <!-- Knuckle lines on palm -->
-    <line x1="10" y1="22" x2="23" y2="22" stroke="#d4a898" stroke-width="0.6" stroke-linecap="round"/>
+  <svg id="cursorBall" class="cursor-ball" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" style="display:none;">
+    <defs>
+      <radialGradient id="ballGrad" cx="38%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+        <stop offset="20%" stop-color="#ff6ec7" stop-opacity="0.55"/>
+        <stop offset="40%" stop-color="#a78bfa" stop-opacity="0.5"/>
+        <stop offset="60%" stop-color="#38bdf8" stop-opacity="0.5"/>
+        <stop offset="80%" stop-color="#34d399" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.4"/>
+      </radialGradient>
+      <radialGradient id="shineGrad" cx="30%" cy="28%" r="40%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="rimGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="70%" stop-color="transparent"/>
+        <stop offset="85%" stop-color="#a78bfa" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#ff6ec7" stop-opacity="0.6"/>
+      </radialGradient>
+      <filter id="ballBlur">
+        <feGaussianBlur stdDeviation="0.5"/>
+      </filter>
+    </defs>
+    <!-- Outer glow ring -->
+    <circle cx="18" cy="18" r="17" fill="none" stroke="url(#ballGrad)" stroke-width="1" opacity="0.5"/>
+    <!-- Main ball -->
+    <circle cx="18" cy="18" r="15" fill="url(#ballGrad)" opacity="0.75"/>
+    <!-- Rim depth -->
+    <circle cx="18" cy="18" r="15" fill="url(#rimGrad)"/>
+    <!-- Specular shine -->
+    <ellipse cx="13" cy="12" rx="5" ry="4" fill="url(#shineGrad)"/>
+    <!-- Small secondary shine -->
+    <ellipse cx="22" cy="23" rx="2" ry="1.5" fill="#ffffff" opacity="0.2"/>
   </svg>
-
-  <!-- Scanline overlay -->
-  <div class="scanline-overlay"></div>
 
   <!-- Star field -->
   <div class="stars" id="stars"></div>
@@ -820,6 +875,14 @@
         <em>Lotus</em>
       </h1>
       <p class="hero-sub">Where the body becomes poetry in the air</p>
+      <div class="vod-buttons">
+        <a href="https://www.manyvids.com/Profile/1005761958/VictoriaLotus/Store/Videos/" target="_blank" rel="noopener" class="btn-vod">Videos On Demand</a>
+        <a href="https://www.clips4sale.com/studio/203999/victoria-lotus" target="_blank" rel="noopener" class="btn-vod">More Videos On Demand</a>
+        <a href="https://yourvids.com/victoria-lotus" target="_blank" rel="noopener" class="btn-vod">Even More Videos On Demand</a>
+        <a href="https://onlyfans.com/victorialotusfree/c3" target="_blank" rel="noopener" class="btn-vod btn-vod-fan">Free Fan Club</a>
+        <a href="https://stripchat.com/victorialotus/follow-me" target="_blank" rel="noopener" class="btn-vod btn-vod-stream">Freemium Live Stream</a>
+        <a href="https://stripmilfs.solidcams.com/landing/click/exports/golive/?AFNO=1-38383" target="_blank" rel="noopener" class="btn-vod btn-vod-premium">Premium Live Stream</a>
+      </div>
       <div class="hero-cta">
         <a href="https://sextpanther.com/victorialotus" target="_blank" rel="noopener" class="btn-primary">Text Me Now</a>
         <a href="https://lotuslounge.solidcams.com" target="_blank" rel="noopener" class="btn-ghost">Visit Lotus Lounge</a>
@@ -843,6 +906,10 @@
         <button class="active" onclick="showTestimonial(0)"></button>
         <button onclick="showTestimonial(1)"></button>
         <button onclick="showTestimonial(2)"></button>
+        <button onclick="showTestimonial(3)"></button>
+        <button onclick="showTestimonial(4)"></button>
+        <button onclick="showTestimonial(5)"></button>
+        <button onclick="showTestimonial(6)"></button>
       </div>
     </div>
   </section>
@@ -890,12 +957,11 @@
           <label class="form-label" for="service">I'm Inquiring About</label>
           <select class="form-input" id="service" name="service" required>
             <option value="" disabled selected>Select a service...</option>
-            <option>Live Performance Booking</option>
-            <option>Aerial Workshop</option>
-            <option>Private Coaching</option>
-            <option>Private Group Event</option>
+            <option>Custom Video Idea</option>
+            <option>Fan Mail</option>
+            <option>Live Show Request</option>
+            <option>Phone Call Request</option>
             <option>Artistic Direction / Collaboration</option>
-            <option>Other</option>
           </select>
         </div>
         <div class="form-group">
@@ -937,18 +1003,18 @@
   </footer>
 
   <script>
-    // ===== RETRO HAND CURSOR =====
-    const hand = document.getElementById('cursorHand');
-    hand.style.display = 'block';
+    // ===== CRYSTAL BALL CURSOR =====
+    const ball = document.getElementById('cursorBall');
+    ball.style.display = 'block';
     let mx = 0, my = 0;
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
-      hand.style.left = mx + 'px';
-      hand.style.top = my + 'px';
+      ball.style.left = mx + 'px';
+      ball.style.top = my + 'px';
     });
     document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => hand.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => hand.classList.remove('hovering'));
+      el.addEventListener('mouseenter', () => ball.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => ball.classList.remove('hovering'));
     });
 
     // ===== STAR FIELD =====
@@ -980,7 +1046,11 @@
     const testimonials = [
       { text: "I don't think there are enough adjectives to describe how wonderful Victoria is. She's definitely one of the top performers — always worth the time.", author: "Verified Client" },
       { text: "Nothing can beat her — she is the sweetest and kindest girl.", author: "Verified Client" },
-      { text: "Incredible girl and show. My whole body was shaking.", author: "Verified Client" }
+      { text: "Incredible girl and show. My whole body was shaking.", author: "Verified Client" },
+      { text: "Victoria is the MILF next door, the PTA President, and the secret who can match a man, kink for kink — rolled into one. She is the woman we all wish we knew IRL. Amazing.", author: "Verified Client" },
+      { text: "Holy mother of Christ. Incredible.", author: "Verified Client" },
+      { text: "She is amazing. If you're into a beautiful woman who is *into it* in a way that is exceptionally rare, this is your girl.", author: "Verified Client" },
+      { text: "What an amazing, sensual, beautiful woman! Get to know Victoria... you'll be so glad you did!", author: "Verified Client" }
     ];
     let current = 0;
     function showTestimonial(idx) {
